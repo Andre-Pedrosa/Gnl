@@ -6,7 +6,7 @@
 /*   By: apedrosa <apedrosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:06:53 by apedrosa          #+#    #+#             */
-/*   Updated: 2023/02/11 19:40:06 by apedrosa         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:35:57 by apedrosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ char	*get_next_line(int fd)
 
 // int	main(void)
 // {
-// 	int		fd;
+// 	int		fd1;
+// 	int		fd2;
 // 	char	*line;
 
-// 	fd = open("txt.txt", O_RDONLY);
-// 	line = get_next_line(fd);
-// 	printf("\noutput ->%s", line);
-// 	printf("%d", fd);
+// 	fd1 = open("txt1.txt", O_RDONLY);
+// 	fd2 = open("txt2.txt", O_RDONLY);
+// 	line = get_next_line(fd1);
+// 	printf("\noutput txt1->%s", line);
+// 	line = get_next_line(fd1);
+// 	printf("\noutput txt1->%s", line);
+// 	line = get_next_line(fd2);
+// 	printf("\noutput txt2->%s", line);
+// 	line = get_next_line(fd1);
+// 	printf("\noutput txt1->%s", line);
+// 	line = get_next_line(fd2);
+// 	printf("\noutput txt2->%s", line);
 // }
