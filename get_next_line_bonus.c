@@ -3,54 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apedrosa <apedrosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atomas-p <atomas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 10:06:53 by apedrosa          #+#    #+#             */
-/*   Updated: 2023/02/28 16:35:57 by apedrosa         ###   ########.fr       */
+/*   Created: 2025/11/28 10:14:29 by atomas-p          #+#    #+#             */
+/*   Updated: 2025/11/28 10:18:32 by atomas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
 	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
-	int			i;
+	int			bytes;
 
-	i = 0;
-	if (BUFFER_SIZE < 1 || read(fd, 0, 0) < 0 || fd > FOPEN_MAX)
-	{
-		while (fd > 0 && fd <= FOPEN_MAX && buffer[fd][i])
-			buffer[fd][i++] = 0;
+	if (BUFFER_SIZE < 1 || fd < 0 || fd > FOPEN_MAX)
 		return (NULL);
-	}
 	line = NULL;
-	while (buffer[fd][0] != '\0' || read(fd, buffer[fd], BUFFER_SIZE))
+	while (1)
 	{
+		if (*buffer[fd] == 0)
+		{
+			bytes = read(fd, buffer[fd], BUFFER_SIZE);
+			if (bytes < 0)
+				return (clean_and_check_newline(buffer[fd]), free(line), NULL);
+			else if (bytes == 0)
+				break ;
+			buffer[fd][bytes] = '\0';
+		}
 		line = ft_strjoin(line, buffer[fd]);
-		if (clean_buffer(buffer[fd]))
+		if (clean_and_check_newline(buffer[fd]))
 			break ;
 	}
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd1;
-// 	int		fd2;
-// 	char	*line;
-
-// 	fd1 = open("txt1.txt", O_RDONLY);
-// 	fd2 = open("txt2.txt", O_RDONLY);
-// 	line = get_next_line(fd1);
-// 	printf("\noutput txt1->%s", line);
-// 	line = get_next_line(fd1);
-// 	printf("\noutput txt1->%s", line);
-// 	line = get_next_line(fd2);
-// 	printf("\noutput txt2->%s", line);
-// 	line = get_next_line(fd1);
-// 	printf("\noutput txt1->%s", line);
-// 	line = get_next_line(fd2);
-// 	printf("\noutput txt2->%s", line);
-// }
