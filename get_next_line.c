@@ -6,7 +6,7 @@
 /*   By: atomas-p <atomas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:19:37 by atomas-p          #+#    #+#             */
-/*   Updated: 2025/11/28 09:58:33 by atomas-p         ###   ########.fr       */
+/*   Updated: 2025/11/28 18:50:23 by atomas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(void)
 	int		fd;
 	char	*line;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("test1.txt", O_RDONLY);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -58,6 +58,7 @@ int	main(void)
 		printf("%s", line);
 		free(line);
 	}
+	close(fd);
 	return (0);
 }
  */
